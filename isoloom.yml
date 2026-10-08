@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://www.isoloom.com/schema/v1.json
+# OWASP SKF JWT Weak Secret (OWASP Security Knowledge Framework labs, by Glenn ten Cate, Riccardo ten Cate and the SKF contributors) as an Isoloom spec:
+# a Flask API that signs its JSON Web Tokens with a guessable HMAC secret (JWT weak secret). The SKF lab folder python/JWT-secret is
+# vendored unchanged in app/ and built by its own Dockerfile.
+# `isoloom generate`, then `isoloom run docker`.
+version: 1
+name: skf-jwt-secret
+
+networks:
+  lab: { cidr: 10.60.147.0/24, internet: false }
+
+machines:
+  web:
+    networks: { lab: 10 }
+    services: [{ port: 5000, name: web, http: true, publish: 5050 }]
+    resources: { cpus: 1, memory_mb: 256 }
+    docker:
+      build: app
+
+checks:
+  - name: the lab answers
+    http: http://web:5000/
+    wait: 120
+  - name: /auth issues JWTs and /protected requires one
+    script: checks/auth.sh
+
+message: |
+  OWASP SKF JWT Weak Secret answers at http://localhost:{{ machines.web.services.0.publish }}/.
+  Authenticate, then take the token offline. How strong is the key that signs it?
