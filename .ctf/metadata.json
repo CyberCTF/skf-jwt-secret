@@ -4,11 +4,5 @@
   "question": "Crack the HMAC secret of the token you are issued, then sign a token that identifies you as another user (JWT weak secret).",
   "category": "WEB",
   "difficulty": 2,
-  "evidence_kind": "SECRET",
-  "capabilities": [
-    "jwt",
-    "brute-force",
-    "cryptography",
-    "authentication-bypass"
-  ]
+  "evidence_kind": "SECRET"
 }
