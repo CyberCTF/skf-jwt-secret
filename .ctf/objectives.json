@@ -1,0 +1,43 @@
+{
+  "objectives": [
+    {
+      "key": "main",
+      "title": "Read the flag",
+      "prompt": "Forge a token for another user and retrieve the flag (/ctf/flag).",
+      "check": {
+        "evidence": "SECRET",
+        "format": "FLAG{%s}"
+      },
+      "dev": "FLAG{dev-skf-jwt-secret}",
+      "hints": [
+        "The tokens are signed with a symmetric algorithm and a short secret.",
+        "Read about offline brute force of HS256 JWT secrets."
+      ],
+      "steps": [
+        {
+          "key": "alg",
+          "title": "Identify the algorithm",
+          "prompt": "Which signing algorithm do the tokens use?",
+          "check": {
+            "answer": [
+              "hs256",
+              "hmac-sha256",
+              "hmac sha256"
+            ]
+          }
+        },
+        {
+          "key": "route",
+          "title": "Find the issuer",
+          "prompt": "Which route issues tokens? (path)",
+          "check": {
+            "answer": [
+              "/auth",
+              "auth"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

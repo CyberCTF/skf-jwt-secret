@@ -1,7 +1,7 @@
 {
   "title": "OWASP SKF JWT Weak Secret",
   "description": "A Flask application that issues HS256 JSON Web Tokens at /auth and checks them at /protected. The signing secret is weak.",
-  "question": "Crack the HMAC secret of the token you are issued, then sign a token that identifies you as another user (JWT weak secret).",
+  "question": "Crack the HMAC secret of your JSON Web Token, then sign a token as another user (JWT weak secret). The flag is in /ctf/flag.",
   "category": "WEB",
   "difficulty": 2,
   "evidence_kind": "SECRET"
